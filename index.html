@@ -1,41 +1,96 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Meu Portfólio</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Meu Site Pessoal</title>
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="script.js"></script>
 </head>
 <body>
-  <header>
-    <h1>Meu Portfólio</h1>
-    <button id="theme-toggle">🌙 Modo Noturno</button>
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <h1 class="logo">Meu <span>Site</span></h1>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="#home">Início</a></li>
+        <li><a href="#sobre">Pessoal</a></li>
+        <li><a href="#hobbies">Hobbies</a></li>
+        <li><a href="#estudos">Estudos</a></li>
+        <li><a href="#contato">Contato</a></li>
+      </ul>
+    </nav>
   </header>
 
-  <main>
-    <div class="menu">
-      <button class="section-btn" data-section="estudos">Estudos</button>
-      <button class="section-btn" data-section="projetos">Projetos</button>
-      <button class="section-btn" data-section="contato">Contato</button>
-      <button class="section-btn" data-section="sobre">Sobre Mim</button>
+  <!-- HOME -->
+  <section id="home" class="section home">
+    <div class="content">
+      <h2>Bem-vindo ao meu espaço!</h2>
+      <p>Texto aleatório sobre você. Pode falar quem você é, o que faz, e um resumo legal sobre sua vida.</p>
+      <a href="#sobre" class="btn">Saiba mais</a>
     </div>
+    <div class="img-placeholder">[IMAGEM SUA AQUI]</div>
+  </section>
 
-    <div class="main-image">
-      <!-- [IMAGEM_PRINCIPAL.PNG] -->
-    </div>
-  </main>
+  <!-- SOBRE -->
+  <section id="sobre" class="section">
+    <h2>Sobre Mim</h2>
+    <p>Texto aleatório sobre sua personalidade, seus gostos, e o que te inspira.</p>
+    <div class="img-placeholder">[IMAGEM SUA AQUI]</div>
+  </section>
 
-  <div id="popup" class="hidden">
-    <div class="popup-box">
-      <span id="close-popup">✖</span>
-      <div id="popup-content"></div>
+  <!-- HOBBIES -->
+  <section id="hobbies" class="section alt">
+    <h2>Meus Hobbies</h2>
+    <div class="cards">
+      <div class="card">
+        <div class="icon">🎨</div>
+        <h3>Desenhar</h3>
+        <p>Texto aleatório sobre seu hobby de desenhar.</p>
+      </div>
+      <div class="card">
+        <div class="icon">🎸</div>
+        <h3>Tocar Instrumentos</h3>
+        <p>Texto aleatório sobre seu gosto por música.</p>
+      </div>
+      <div class="card">
+        <div class="icon">🎮</div>
+        <h3>Jogar</h3>
+        <p>Texto aleatório sobre seu passatempo favorito.</p>
+      </div>
     </div>
-  </div>
+  </section>
+
+  <!-- ESTUDOS -->
+  <section id="estudos" class="section">
+    <h2>Estudos</h2>
+    <p>Texto aleatório sobre o que você estuda ou quer aprender.</p>
+    <div class="timeline">
+      <div class="item">
+        <span>📘</span>
+        <p>Texto aleatório sobre um curso ou aprendizado.</p>
+      </div>
+      <div class="item">
+        <span>💻</span>
+        <p>Texto aleatório sobre projetos ou aprendizados de tecnologia.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTATO -->
+  <section id="contato" class="section alt">
+    <h2>Contato</h2>
+    <p>Quer falar comigo? Preencha abaixo:</p>
+    <form class="contact-form">
+      <input type="text" placeholder="vicente kulkamp carvalho" required>
+      <input type="email" placeholder="vi2812009@gmail.com" required>
+      <textarea placeholder="Sua mensagem..." required></textarea>
+      <button type="submit" class="btn">Enviar</button>
+    </form>
+  </section>
 
   <footer>
-    <p>Feito por você ❤️</p>
+    <p>Feito com 💛 por Vicentolas </p>
   </footer>
-
-  <script src="script.js"></script>
 </body>
 </html>
