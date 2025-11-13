@@ -1,81 +1,75 @@
-/* Reset básico */
+/* RESET */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
+  font-family: 'Poppins', sans-serif;
 }
 
 body {
-  background-color: #fff8dc; /* amarelo claro */
+  background: #fff8dc;
   color: #333;
-  transition: background 0.5s, color 0.5s;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  transition: background 0.4s ease, color 0.4s ease;
 }
 
-/* ===== Header ===== */
+/* HEADER */
 header {
+  background: #ffd700;
+  padding: 1rem 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 2rem;
-  background-color: #ffd700; /* dourado */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-header h1 {
-  font-size: 1.8rem;
 }
 
 #theme-toggle {
-  background-color: #fff8dc;
-  border: 2px solid #d4af37;
-  color: #333;
+  background: #fff8dc;
+  border: 2px solid #b8860b;
   padding: 0.5rem 1rem;
-  border-radius: 8px;
+  border-radius: 10px;
   cursor: pointer;
   transition: 0.3s;
 }
 
 #theme-toggle:hover {
-  background-color: #fff3b0;
+  background: #fff2a8;
 }
 
-/* ===== Menu ===== */
+/* MENU */
 main {
   flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  text-align: center;
+  gap: 2rem;
 }
 
 .menu {
   display: flex;
-  flex-wrap: wrap;
   gap: 1rem;
-  margin: 2rem 0;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .section-btn {
-  background-color: #ffd700;
+  background: #ffd700;
   border: none;
-  padding: 0.8rem 1.5rem;
+  padding: 1rem 1.5rem;
   border-radius: 12px;
   cursor: pointer;
   font-size: 1.1rem;
-  transition: all 0.3s ease;
+  transition: 0.3s;
 }
 
 .section-btn:hover {
-  background-color: #facc15;
+  background: #ffec8b;
   transform: scale(1.05);
 }
 
-/* ===== Imagem Principal ===== */
+/* IMAGEM PRINCIPAL */
 .main-image {
   width: 300px;
   height: 200px;
@@ -83,105 +77,86 @@ main {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #999;
+  color: #777;
   font-size: 0.9rem;
-  margin-top: 2rem;
 }
 
-/* ===== Popup ===== */
+/* POPUP */
 #popup {
   position: fixed;
   inset: 0;
-  background-color: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.6);
   display: flex;
-  align-items: center;
   justify-content: center;
-  animation: fadeIn 0.3s ease;
+  align-items: center;
 }
 
-#popup.hidden {
+.hidden {
   display: none;
 }
 
-.popup-content {
-  background-color: #fffbe6;
+.popup-box {
+  background: #fffbe6;
   padding: 2rem;
   border-radius: 16px;
-  max-width: 400px;
-  text-align: center;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-  animation: popupZoom 0.3s ease;
+  width: 350px;
+  position: relative;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  animation: showPopup 0.3s ease;
 }
 
 #close-popup {
-  margin-top: 1rem;
-  padding: 0.5rem 1.2rem;
-  background-color: #ffd700;
-  border: none;
-  border-radius: 8px;
+  position: absolute;
+  top: 10px;
+  right: 15px;
   cursor: pointer;
-  transition: 0.3s;
+  font-size: 1.2rem;
 }
 
-#close-popup:hover {
-  background-color: #facc15;
-}
-
-/* ===== Footer ===== */
-footer {
-  background-color: #ffd700;
-  text-align: center;
-  padding: 1rem;
-  color: #222;
-  font-weight: 500;
-}
-
-/* ===== Animações ===== */
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-@keyframes popupZoom {
+@keyframes showPopup {
   from { transform: scale(0.8); opacity: 0; }
   to { transform: scale(1); opacity: 1; }
 }
 
+/* FOOTER */
+footer {
+  background: #ffd700;
+  text-align: center;
+  padding: 1rem;
+  font-weight: 500;
+}
+
 /* ===== MODO NOTURNO ===== */
 body.dark-mode {
-  background-color: #0b1120;
-  color: #d0e7ff;
+  background: #0b1120;
+  color: #e0e7ff;
 }
 
 body.dark-mode header {
-  background-color: #16213e;
-}
-
-body.dark-mode .section-btn {
-  background-color: #1e3a8a;
-  color: #f8fafc;
-}
-
-body.dark-mode .section-btn:hover {
-  background-color: #2563eb;
+  background: #16213e;
 }
 
 body.dark-mode footer {
-  background-color: #16213e;
-  color: #c7d2fe;
+  background: #16213e;
+  color: #a5b4fc;
 }
 
-body.dark-mode .popup-content {
-  background-color: #1e293b;
+body.dark-mode .section-btn {
+  background: #1e3a8a;
   color: #f1f5f9;
 }
 
+body.dark-mode .section-btn:hover {
+  background: #2563eb;
+}
+
 body.dark-mode #theme-toggle {
-  background-color: #1e3a8a;
+  background: #1e3a8a;
   color: #f1f5f9;
   border-color: #3b82f6;
 }
 
-body.dark-mode #theme-toggle:hover {
-  background-color: #2563eb;
+body.dark-mode #popup .popup-box {
+  background: #1e293b;
+  color: #f8fafc;
 }

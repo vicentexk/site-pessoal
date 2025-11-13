@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Meu Portfólio</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header>
@@ -13,28 +13,28 @@
   </header>
 
   <main>
-    <section class="menu">
+    <div class="menu">
       <button class="section-btn" data-section="estudos">Estudos</button>
       <button class="section-btn" data-section="projetos">Projetos</button>
       <button class="section-btn" data-section="contato">Contato</button>
       <button class="section-btn" data-section="sobre">Sobre Mim</button>
-    </section>
+    </div>
 
-    <!-- Aqui você pode colocar uma imagem principal -->
     <div class="main-image">
       <!-- [IMAGEM_PRINCIPAL.PNG] -->
     </div>
   </main>
 
-  <footer>
-    <p>Feito por Você ❤️</p>
-  </footer>
-
-  <!-- Popup -->
   <div id="popup" class="hidden">
-    <div class="popup-content" id="popup-content"></div>
-    <button id="close-popup">Fechar</button>
+    <div class="popup-box">
+      <span id="close-popup">✖</span>
+      <div id="popup-content"></div>
+    </div>
   </div>
+
+  <footer>
+    <p>Feito por você ❤️</p>
+  </footer>
 
   <script src="script.js"></script>
 </body>
