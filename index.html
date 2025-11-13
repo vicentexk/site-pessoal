@@ -1,99 +1,40 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quem Sou Eu - Vicentelos</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Meu Portfólio</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
-<body class="light-mode">
-
-  <!-- 🌓 BOTÃO DE MODO CLARO/ESCURO -->
-  <button id="theme-toggle" class="theme-toggle">🌙</button>
-
-  <!-- 🧭 CABEÇALHO -->
-  <header class="main-header">
-    <h1>Quem Sou Eu?</h1>
-    <h2>Vicentelos</h2>
+<body>
+  <header>
+    <h1>Meu Portfólio</h1>
+    <button id="theme-toggle">🌙 Modo Noturno</button>
   </header>
 
-  <!-- 👤 FOTO DE PERFIL -->
-  <section class="profile-section">
-    <!-- ⬇️ COLOQUE AQUI SUA FOTO DE PERFIL -->
-    <!-- arquivo sugerido: perfil.png -->
-    <img src="imagens/perfil.png" alt="Foto de perfil" class="profile-img">
-  </section>
+  <main>
+    <section class="menu">
+      <button class="section-btn" data-section="estudos">Estudos</button>
+      <button class="section-btn" data-section="projetos">Projetos</button>
+      <button class="section-btn" data-section="contato">Contato</button>
+      <button class="section-btn" data-section="sobre">Sobre Mim</button>
+    </section>
 
-  <!-- 🔘 BOTÕES PRINCIPAIS -->
-  <section class="buttons-section">
-    <button class="main-btn" data-modal="estudos">🎓 Estudos</button>
-    <button class="main-btn" data-modal="projetos">🧠 Projetos</button>
-    <button class="main-btn" data-modal="hobbies">🎨 Hobbies</button>
-    <button class="main-btn" data-modal="contato">💬 Contato</button>
-  </section>
-
-  <!-- 🎓 MODAL: ESTUDOS -->
-  <div class="modal" id="modal-estudos">
-    <div class="modal-content">
-      <span class="close">&times;</span>
-      <h3>Estudos</h3>
-      <p>Atualmente estudo no Colégio Júlio Strummfald.<br>
-      Estou cursando Análise e Projeto de Sistemas.<br>
-      Também faço cursos na <strong>Alura</strong>.</p>
-      <!-- ⬇️ COLOQUE AQUI O LOGO DA ALURA -->
-      <!-- arquivo sugerido: alura.png -->
-      <img src="imagens/alura.png" alt="Logo da Alura" class="modal-img">
+    <!-- Aqui você pode colocar uma imagem principal -->
+    <div class="main-image">
+      <!-- [IMAGEM_PRINCIPAL.PNG] -->
     </div>
-  </div>
+  </main>
 
-  <!-- 🧠 MODAL: PROJETOS -->
-  <div class="modal" id="modal-projetos">
-    <div class="modal-content">
-      <span class="close">&times;</span>
-      <h3>Projetos</h3>
-      <p>Atualmente estou trabalhando em um projeto de Arduino com meus parceiros.<br>
-      Criamos um sistema de futebol com LEDs e código no <strong>KiCad</strong>.</p>
-      <!-- ⬇️ COLOQUE AQUI A IMAGEM DO PROJETO ARDUINO -->
-      <!-- arquivo sugerido: arduino.png -->
-      <img src="imagens/arduino.png" alt="Imagem do projeto Arduino" class="modal-img">
-    </div>
-  </div>
-
-  <!-- 🎨 MODAL: HOBBIES -->
-  <div class="modal" id="modal-hobbies">
-    <div class="modal-content">
-      <span class="close">&times;</span>
-      <h3>Hobbies</h3>
-      <p>Gosto de desenhar, tocar violão e fazer outras coisas criativas.</p>
-      <div class="hobby-images">
-        <!-- ⬇️ COLOQUE AQUI OS ÍCONES DOS HOBBIES -->
-        <!-- arquivos sugeridos: violao.png e desenho.png -->
-        <img src="imagens/violao.png" alt="Violão" class="modal-img">
-        <img src="imagens/desenho.png" alt="Desenho" class="modal-img">
-      </div>
-    </div>
-  </div>
-
-  <!-- 💬 MODAL: CONTATO -->
-  <div class="modal" id="modal-contato">
-    <div class="modal-content">
-      <span class="close">&times;</span>
-      <h3>Contato</h3>
-      <p>Você pode me encontrar nas redes:</p>
-      <div class="contact-icons">
-        <!-- ⬇️ COLOQUE AQUI OS ÍCONES DE CONTATO -->
-        <!-- arquivos sugeridos: email.png, whatsapp.png, instagram.png -->
-        <img src="imagens/email.png" alt="Email" class="contact-icon">
-        <img src="imagens/whatsapp.png" alt="WhatsApp" class="contact-icon">
-        <img src="imagens/instagram.png" alt="Instagram" class="contact-icon">
-      </div>
-    </div>
-  </div>
-
-  <!-- ⚙️ RODAPÉ -->
-  <footer class="main-footer">
-    <p>© 2025 Vicentelos</p>
+  <footer>
+    <p>Feito por Você ❤️</p>
   </footer>
+
+  <!-- Popup -->
+  <div id="popup" class="hidden">
+    <div class="popup-content" id="popup-content"></div>
+    <button id="close-popup">Fechar</button>
+  </div>
 
   <script src="script.js"></script>
 </body>
