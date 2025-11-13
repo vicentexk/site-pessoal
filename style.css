@@ -4,8 +4,19 @@
   --bg: #fffaf0;
   --text: #333;
   --accent: #f6b93b;
-  --green: #85bb65;
+  --green: #7bc47f;
   --alt-bg: #fff3e0;
+  --shadow: rgba(0, 0, 0, 0.1);
+}
+
+body.dark {
+  --bg: #1e1e1e;
+  --text: #f2f2f2;
+  --accent: #ffae00;
+  --green: #2ecc71;
+  --alt-bg: #2a2a2a;
+  --shadow: rgba(255, 255, 255, 0.05);
+  transition: 0.5s;
 }
 
 * {
@@ -19,17 +30,19 @@
 body {
   background: var(--bg);
   color: var(--text);
+  overflow-x: hidden;
+  cursor: url('https://cur.cursors-4u.net/nature/nat-3/nat228.cur'), auto;
 }
 
 .navbar {
   position: fixed;
   width: 100%;
-  background: white;
+  background: var(--bg);
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 15px 60px;
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 3px 8px var(--shadow);
   z-index: 10;
 }
 
@@ -57,7 +70,8 @@ body {
 .section {
   padding: 100px 60px;
   text-align: center;
-  animation: fadeIn 1s ease;
+  position: relative;
+  transition: background 0.5s, color 0.5s;
 }
 
 .alt {
@@ -69,7 +83,6 @@ body {
   align-items: center;
   justify-content: space-between;
   min-height: 100vh;
-  background: linear-gradient(120deg, #fffaf0 40%, #fff3e0);
 }
 
 .home .content {
@@ -86,22 +99,28 @@ body {
   justify-content: center;
   color: #aaa;
   font-size: 14px;
+  box-shadow: 0 0 10px var(--shadow);
   animation: float 3s ease-in-out infinite;
 }
 
 .btn {
-  background: var(--accent);
-  color: white;
-  padding: 10px 20px;
-  border-radius: 25px;
-  text-decoration: none;
-  display: inline-block;
-  margin-top: 15px;
-  transition: transform 0.3s;
+  padding: 12px 25px;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.3s;
 }
 
-.btn:hover {
-  transform: scale(1.1);
+.btn.glow {
+  background: linear-gradient(90deg, var(--accent), var(--green));
+  color: white;
+  box-shadow: 0 0 10px var(--accent);
+}
+
+.btn.glow:hover {
+  transform: scale(1.1) rotate(-2deg);
+  box-shadow: 0 0 20px var(--accent);
 }
 
 .cards {
@@ -112,12 +131,12 @@ body {
 }
 
 .card {
-  background: white;
+  background: var(--bg);
   border-radius: 20px;
   padding: 30px;
   width: 250px;
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s;
+  box-shadow: 0 3px 8px var(--shadow);
+  transition: transform 0.3s, background 0.5s;
 }
 
 .card:hover {
@@ -138,13 +157,18 @@ body {
 }
 
 .item {
-  background: white;
+  background: var(--bg);
   border-left: 5px solid var(--accent);
   padding: 20px;
   width: 60%;
   border-radius: 10px;
   text-align: left;
-  animation: slideIn 1s ease;
+  transition: 0.5s;
+}
+
+.item:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px var(--shadow);
 }
 
 .contact-form {
@@ -160,6 +184,8 @@ input, textarea {
   border-radius: 10px;
   border: 1px solid #ccc;
   resize: none;
+  background: var(--bg);
+  color: var(--text);
 }
 
 footer {
@@ -169,42 +195,62 @@ footer {
   text-align: center;
 }
 
-/* ANIMAÇÕES */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+/* BOTÃO DARK MODE */
+#darkToggle {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  background: var(--accent);
+  border: none;
+  color: white;
+  padding: 15px;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 0 10px var(--accent);
+  font-size: 20px;
+  z-index: 20;
+  transition: 0.3s;
+}
+#darkToggle:hover {
+  transform: scale(1.1) rotate(10deg);
 }
 
+/* ANIMAÇÕES */
 @keyframes float {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-10px); }
 }
 
-@keyframes slideIn {
-  from { transform: translateX(-50px); opacity: 0; }
-  to { transform: translateX(0); opacity: 1; }
+/* FOLHAS FLUTUANDO */
+.leaves::before, .leaves::after {
+  content: '🍃';
+  position: fixed;
+  font-size: 25px;
+  opacity: 0.4;
+  animation: fall 12s linear infinite;
+}
+.leaves::after {
+  animation-delay: 5s;
+}
+@keyframes fall {
+  0% { top: -50px; left: 10%; transform: rotate(0deg); }
+  100% { top: 100vh; left: 90%; transform: rotate(360deg); }
 }
 
 /* RESPONSIVIDADE */
 @media (max-width: 768px) {
   .home {
     flex-direction: column;
+    gap: 30px;
   }
-
   .home .content {
     max-width: 100%;
   }
-
   .img-placeholder {
     width: 200px;
     height: 200px;
   }
-
   .contact-form {
     width: 100%;
-  }
-
-  .navbar {
-    padding: 15px 20px;
   }
 }
