@@ -1,102 +1,138 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Meu Site Pessoal 🌿</title>
-  <link rel="stylesheet" href="style.css" />
-  <script defer src="script.js"></script>
-</head>
-<body>
-  <!-- BOTÃO DARK MODE -->
-  <button id="darkToggle" title="Mudar tema">🌞</button>
+// ======== DARK MODE ========
+const darkToggle = document.getElementById("darkToggle");
+darkToggle.addEventListener("click", () => {
+  document.body.classList.toggle("dark");
+  darkToggle.textContent = document.body.classList.contains("dark") ? "🌙" : "🌞";
+});
 
-  <!-- DECORAÇÃO DE FUNDO -->
-  <div class="leaves"></div>
+// ======== ANIMAÇÃO DE DIGITAÇÃO ========
+const typewriter = document.getElementById("typewriter");
+const text = "Bem-vindo ao meu site pessoal!";
+let index = 0;
+function type() {
+  if (index < text.length) {
+    typewriter.textContent += text.charAt(index);
+    index++;
+    setTimeout(type, 80);
+  }
+}
+type();
 
-  <!-- NAVBAR -->
-  <header class="navbar">
-    <h1 class="logo">Meu <span>Site</span></h1>
-    <nav>
-      <ul class="nav-links">
-        <li><a href="#home">Início</a></li>
-        <li><a href="#sobre">Pessoal</a></li>
-        <li><a href="#hobbies">Hobbies</a></li>
-        <li><a href="#estudos">Estudos</a></li>
-        <li><a href="#contato">Contato</a></li>
-      </ul>
-    </nav>
-  </header>
+// ======== SCROLL ANIMADO ========
+window.addEventListener("scroll", () => {
+  document.querySelectorAll(".section").forEach(sec => {
+    const top = sec.getBoundingClientRect().top;
+    if (top < window.innerHeight - 100) sec.classList.add("visible");
+  });
+});
 
-  <!-- HOME -->
-  <section id="home" class="section home">
-    <div class="content">
-      <h2 id="typewriter"></h2>
-      <p>Texto aleatório sobre você. Pode falar quem você é, o que faz, e um resumo legal sobre sua vida.</p>
-      <a href="#sobre" class="btn glow">Saiba mais 🌻</a>
+// ======== KONAMI CODE (↑↑↓↓←→←→Enter) ========
+const secretBtn = document.getElementById("secretBtn");
+const konamiCode = [
+  "ArrowUp","ArrowUp","ArrowDown","ArrowDown",
+  "ArrowLeft","ArrowRight","ArrowLeft","ArrowRight","Enter"
+];
+let input = [];
+
+window.addEventListener("keydown", (e) => {
+  input.push(e.key);
+  if (input.length > konamiCode.length) input.shift();
+
+  if (JSON.stringify(input) === JSON.stringify(konamiCode)) {
+    showKonamiPopup();
+  }
+});
+
+// ======== POPUP DE CÓDIGO ATIVADO ========
+function showKonamiPopup() {
+  const popup = document.createElement("div");
+  popup.classList.add("popup");
+  popup.innerHTML = `
+    <div class="popup-content">
+      <h3>✨ Código Secreto Ativado! ✨</h3>
+      <p>Você desbloqueou algo especial...</p>
     </div>
-    <div class="img-placeholder">[IMAGEM SUA AQUI]</div>
-  </section>
+  `;
+  document.body.appendChild(popup);
+  popup.style.display = "flex";
 
-  <!-- SOBRE -->
-  <section id="sobre" class="section">
-    <h2>Sobre Mim</h2>
-    <p>Texto aleatório sobre sua personalidade, seus gostos, e o que te inspira.</p>
-    <div class="img-placeholder">[IMAGEM SUA AQUI]</div>
-  </section>
+  setTimeout(() => {
+    popup.remove();
+    secretBtn.style.display = "block";
+  }, 2000);
+}
 
-  <!-- HOBBIES -->
-  <section id="hobbies" class="section alt">
-    <h2>Meus Hobbies</h2>
-    <div class="cards">
-      <div class="card">
-        <div class="icon">🎨</div>
-        <h3>Desenhar</h3>
-        <p>Texto aleatório sobre seu hobby de desenhar.</p>
-      </div>
-      <div class="card">
-        <div class="icon">🎸</div>
-        <h3>Tocar Instrumentos</h3>
-        <p>Texto aleatório sobre seu gosto por música.</p>
-      </div>
-      <div class="card">
-        <div class="icon">🎮</div>
-        <h3>Jogar</h3>
-        <p>Texto aleatório sobre seu passatempo favorito.</p>
-      </div>
-    </div>
-  </section>
+// ======== MINI PONG ========
+const popup = document.getElementById("gamePopup");
+const closeGame = document.getElementById("closeGame");
 
-  <!-- ESTUDOS -->
-  <section id="estudos" class="section">
-    <h2>Estudos</h2>
-    <p>Texto aleatório sobre o que você estuda ou quer aprender.</p>
-    <div class="timeline">
-      <div class="item">
-        <span>📘</span>
-        <p>Texto aleatório sobre um curso ou aprendizado.</p>
-      </div>
-      <div class="item">
-        <span>💻</span>
-        <p>Texto aleatório sobre projetos ou aprendizados de tecnologia.</p>
-      </div>
-    </div>
-  </section>
+secretBtn.addEventListener("click", () => {
+  popup.style.display = "flex";
+  startPong();
+});
 
-  <!-- CONTATO -->
-  <section id="contato" class="section alt">
-    <h2>Contato</h2>
-    <p>Quer falar comigo? Preencha abaixo:</p>
-    <form class="contact-form">
-      <input type="text" placeholder="Seu nome" required>
-      <input type="email" placeholder="Seu email" required>
-      <textarea placeholder="Sua mensagem..." required></textarea>
-      <button type="submit" class="btn glow">Enviar 🍃</button>
-    </form>
-  </section>
+closeGame.addEventListener("click", () => {
+  popup.style.display = "none";
+  cancelAnimationFrame(pongAnimation);
+});
 
-  <footer>
-    <p>Feito com 💛 e 🌿 por [SEU NOME]</p>
-  </footer>
-</body>
-</html>
+let pongAnimation;
+function startPong() {
+  const canvas = document.getElementById("pong");
+  const ctx = canvas.getContext("2d");
+
+  const player = { x: 10, y: 120, w: 10, h: 60, dy: 0 };
+  const ai = { x: 380, y: 120, w: 10, h: 60, dy: 2 };
+  const ball = { x: 200, y: 150, r: 6, dx: 3, dy: 3 };
+
+  document.addEventListener("keydown", e => {
+    if (e.key === "ArrowUp") player.dy = -4;
+    if (e.key === "ArrowDown") player.dy = 4;
+  });
+  document.addEventListener("keyup", e => {
+    if (["ArrowUp", "ArrowDown"].includes(e.key)) player.dy = 0;
+  });
+
+  function drawRect(x, y, w, h, color) {
+    ctx.fillStyle = color;
+    ctx.fillRect(x, y, w, h);
+  }
+
+  function drawCircle(x, y, r, color) {
+    ctx.fillStyle = color;
+    ctx.beginPath();
+    ctx.arc(x, y, r, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  function update() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    player.y += player.dy;
+    player.y = Math.max(0, Math.min(canvas.height - player.h, player.y));
+
+    ball.x += ball.dx;
+    ball.y += ball.dy;
+
+    if (ball.y < 0 || ball.y > canvas.height) ball.dy *= -1;
+    if (ball.x - ball.r < player.x + player.w && ball.y > player.y && ball.y < player.y + player.h) {
+      ball.dx *= -1;
+      ball.x = player.x + player.w + ball.r;
+    }
+    if (ball.x + ball.r > ai.x && ball.y > ai.y && ball.y < ai.y + ai.h) {
+      ball.dx *= -1;
+      ball.x = ai.x - ball.r;
+    }
+
+    ai.y += (ball.y - (ai.y + ai.h/2)) * 0.05;
+    if (ball.x < 0 || ball.x > canvas.width) {
+      ball.x = 200; ball.y = 150; ball.dx *= -1;
+    }
+
+    drawRect(player.x, player.y, player.w, player.h, "#f6b93b");
+    drawRect(ai.x, ai.y, ai.w, ai.h, "#85bb65");
+    drawCircle(ball.x, ball.y, ball.r, "white");
+
+    pongAnimation = requestAnimationFrame(update);
+  }
+  update();
+}
