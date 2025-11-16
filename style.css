@@ -64,7 +64,7 @@ body {
   background: var(--bg);
   color: var(--text);
   overflow-x: hidden;
-  cursor: url('https://cur.cursors-4u.net/nature/nat-3/nat228.cur'), auto;
+ cursor: url('https://cdn.jsdelivr.net/gh/innnky/cursors@master/cursors/frog-2.cur'), auto;
 }
 
 .navbar {
