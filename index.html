@@ -7,16 +7,6 @@
   <link rel="stylesheet" href="style.css" />
   <script defer src="script.js"></script>
 </head>
-  <!-- BOTÃO SECRETO (ESCONDIDO) -->
-  <button id="secretPongBtn">Jogar Pong</button>
-
-  <!-- POPUP DO PONG -->
-  <div id="pongPopup">
-    <div id="pongBox">
-      <canvas id="pongCanvas" width="500" height="300"></canvas>
-      <button id="closePong">X</button>
-    </div>
-  </div>
 <body>
   <!-- BOTÃO DARK MODE -->
   <button id="darkToggle" title="Mudar tema">🌞</button>
@@ -46,7 +36,6 @@
       <a href="#sobre" class="btn glow">Saiba mais 🌻</a>
     </div>
 
-    <!-- IMAGEM CORRIGIDA -->
     <img class="img-placeholder" src="imagemhome.png" alt="Foto da home">
   </section>
 
@@ -58,7 +47,6 @@
       Alguém que me inspira muito é Tiago Hierath.
     </p>
 
-    <!-- IMAGEM CORRIGIDA -->
     <img class="img-placeholder" src="imagemsaibamais.png" alt="Minha foto">
   </section>
 
@@ -119,6 +107,26 @@
 
   <footer>
     <p>Feito com 💛 e 🌿 por Vicentolas</p>
+
+    <!-- 🌟 BOTÃO SECRETO PONG -->
+    <button id="secretPongBtn" class="hidden-pong-btn">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
+           stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="9" cy="9" r="2"/>
+        <circle cx="15" cy="9" r="2"/>
+        <path d="M6 15c2 3 4 4 6 4s4-1 6-4"/>
+      </svg>
+    </button>
+
   </footer>
+
+  <!-- 🌟 POPUP DO PONG -->
+  <div id="pongPopup" class="pong-popup">
+    <div class="pong-window">
+      <canvas id="pongCanvas" width="600" height="400"></canvas>
+      <button id="closePong" class="close-pong">X</button>
+    </div>
+  </div>
+
 </body>
 </html>

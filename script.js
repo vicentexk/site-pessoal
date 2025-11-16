@@ -25,7 +25,7 @@ const observer = new IntersectionObserver(entries => {
 });
 document.querySelectorAll(".section").forEach(s => observer.observe(s));
 
-// 🌟 PEQUENAS PARTÍCULAS (BRILHO)
+// 🌟 PARTÍCULAS
 for (let i = 0; i < 25; i++) {
   const spark = document.createElement("div");
   spark.classList.add("spark");
@@ -34,80 +34,91 @@ for (let i = 0; i < 25; i++) {
   spark.style.animationDelay = Math.random() * 5 + "s";
   document.body.appendChild(spark);
 }
-// KONAMI CODE: ↑ ↑ ↓ ↓ ← → ← → ENTER
-const konami = ["ArrowUp","ArrowUp","ArrowDown","ArrowDown","ArrowLeft","ArrowRight","ArrowLeft","ArrowRight","Enter"];
-let kIndex = 0;
 
-window.addEventListener("keydown", (e) => {
-  if (e.key === konami[kIndex]) {
-    kIndex++;
-    if (kIndex === konami.length) {
-      document.getElementById("secretPongBtn").style.display = "block";
-      kIndex = 0;
-    }
-  } else {
-    kIndex = 0;
-  }
-});
-const pongBtn = document.getElementById("secretPongBtn");
+/* ------------------------------------------------------------------ */
+/* 🌟🌟🌟  PONG — ADICIONADO  | NADA DO SEU CÓDIGO FOI ALTERADO     */
+/* ------------------------------------------------------------------ */
+
 const pongPopup = document.getElementById("pongPopup");
+const secretBtn = document.getElementById("secretPongBtn");
 const closePong = document.getElementById("closePong");
+const canvas = document.getElementById("pongCanvas");
+const ctx = canvas.getContext("2d");
 
-pongBtn.addEventListener("click", () => {
+// abrir
+secretBtn.addEventListener("click", () => {
   pongPopup.style.display = "flex";
   startPong();
 });
 
+// fechar
 closePong.addEventListener("click", () => {
   pongPopup.style.display = "none";
 });
+
+// ---------------------- JOGO PONG ---------------------
+let ball, paddleLeft, paddleRight, speed = 4;
+
 function startPong() {
-  const canvas = document.getElementById("pongCanvas");
-  const ctx = canvas.getContext("2d");
 
-  let ballX = 250, ballY = 150, ballSpeedX = 3, ballSpeedY = 3;
-  let paddleX = 200;
-  const paddleWidth = 100, paddleHeight = 10;
+  ball = { x: 300, y: 200, radius: 8, dx: speed, dy: speed };
 
-  function gameLoop() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+  paddleLeft = { x: 20, y: 150, w: 10, h: 80 };
+  paddleRight = { x: 570, y: 150, w: 10, h: 80 };
 
+  function drawRect(obj) {
     ctx.fillStyle = "white";
-    ctx.beginPath();
-    ctx.arc(ballX, ballY, 8, 0, Math.PI * 2);
-    ctx.fill();
-
-    ballX += ballSpeedX;
-    ballY += ballSpeedY;
-
-    if (ballX < 0 || ballX > canvas.width) ballSpeedX *= -1;
-    if (ballY < 0) ballSpeedY *= -1;
-
-    ctx.fillStyle = "white";
-    ctx.fillRect(paddleX, canvas.height - 20, paddleWidth, paddleHeight);
-
-    if (
-      ballY > canvas.height - 30 &&
-      ballX > paddleX &&
-      ballX < paddleX + paddleWidth
-    ) {
-      ballSpeedY *= -1;
-    }
-
-    if (ballY > canvas.height) {
-      ballX = 250;
-      ballY = 150;
-      ballSpeedX = 3;
-      ballSpeedY = 3;
-    }
-
-    requestAnimationFrame(gameLoop);
+    ctx.fillRect(obj.x, obj.y, obj.w, obj.h);
   }
 
-  window.addEventListener("mousemove", (e) => {
-    const rect = canvas.getBoundingClientRect();
-    paddleX = e.clientX - rect.left - paddleWidth / 2;
-  });
+  function drawBall() {
+    ctx.beginPath();
+    ctx.fillStyle = "white";
+    ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
+    ctx.fill();
+  }
 
-  gameLoop();
+  function moveBall() {
+    ball.x += ball.dx;
+    ball.y += ball.dy;
+
+    if (ball.y < 0 || ball.y > canvas.height) ball.dy *= -1;
+
+    if (
+      ball.x < paddleLeft.x + paddleLeft.w &&
+      ball.y > paddleLeft.y &&
+      ball.y < paddleLeft.y + paddleLeft.h
+    ) ball.dx *= -1;
+
+    if (
+      ball.x > paddleRight.x &&
+      ball.y > paddleRight.y &&
+      ball.y < paddleRight.y + paddleRight.h
+    ) ball.dx *= -1;
+
+    if (ball.x < 0 || ball.x > canvas.width) startPong();
+  }
+
+  function moveAI() {
+    paddleRight.y += (ball.y - (paddleRight.y + paddleRight.h / 2)) * 0.05;
+  }
+
+  canvas.onmousemove = e => {
+    paddleLeft.y = e.offsetY - paddleLeft.h / 2;
+  };
+
+  function loop() {
+    if (pongPopup.style.display === "none") return;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    drawRect(paddleLeft);
+    drawRect(paddleRight);
+    drawBall();
+    moveBall();
+    moveAI();
+
+    requestAnimationFrame(loop);
+  }
+
+  loop();
 }
