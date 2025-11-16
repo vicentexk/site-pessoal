@@ -31,7 +31,8 @@ body {
   background: var(--bg);
   color: var(--text);
   overflow-x: hidden;
-  cursor: url("https://cur.cursors-4u.net/nature/nat-2/nat165.cur"), auto;
+  cursor: url('https://cur.cursors-4u.net/nature/nat-3/nat228.cur'), auto;
+
 }
 
 /* NAVBAR */
